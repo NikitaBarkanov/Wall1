@@ -1,34 +1,36 @@
 fun main(){
-    val post = Post(1, 1,1,1 ,1,"ddd", 1,1,false,1,1,1,
-        "fff", 1, false, false,false, false, false,false)
+    val post = Post()
+    val post1 = Post()
     WallService.addPost(post)
-    val post1 = Post(2, 1,1,1 ,1,"ddd", 1,1,false,1,1,1,
-        "fff", 1, false, false,false, false, false,false)
     WallService.addPost(post1)
-    println(WallService)
+    WallService.update(post)
+    println(post)
+    println(post1)
 }
 
+data class Text(val str: String = "text")
+
 data class Post(
-    val id: Int,
-    val ownerId: Int,
-    val fromId: Int,
-    val createBy: Int,
-    val date: Int,
-    var text: String,
-    val replyOwnerId: Int,
-    val replyPostId: Int,
-    val friendsOnly: Boolean,
-    var comments: Int = 0,          // это счетчик
-    var likes: Int = 0,             //это счетчик
-    var reposts: Int = 0,           //это счетчик
-    val postType: String,
-    val signerId: Int,
-    val canPin: Boolean,
-    val canDelete: Boolean,
-    val canEdit: Boolean,
-    val isPinned: Boolean,
-    val markedAsAds: Boolean,
-    val isFavourite: Boolean
+    val id: Int = 0,
+    val ownerId: Int = 0,
+    val fromId: Int = 0,
+    val createBy: Int = 0,
+    val date: Int = 0,
+    val text: Text = Text(),
+    val replyOwnerId: Int = 0,
+    val replyPostId: Int = 0,
+    val friendsOnly: Boolean = false,
+    val comments: Int = 0,
+    val likes: Int = 0,
+    val reposts: Int = 0,
+    val postType: String = "",
+    val signerId: Int = 0,
+    val canPin: Boolean = false,
+    val canDelete: Boolean = false,
+    val canEdit: Boolean = false,
+    val isPinned: Boolean = false,
+    val markedAsAds: Boolean = true,
+    val isFavourite: Boolean = false
 )
 
 object WallService{
@@ -40,20 +42,17 @@ object WallService{
         return posts.last()
     }
 
-    fun postUpdate(id: Int){
-        for ((index, post) in posts.withIndex()){
-            if (post.id == id){
-                posts[index]=post.copy(text = post.text + "UPD")
+    fun update(newPost: Post): Boolean{
+        for (post in posts){
+            if (post.id == newPost.id){
+                post.copy(ownerId = newPost.ownerId + 1,
+                    fromId = newPost.fromId + 1,
+                    createBy = newPost.createBy + 1,
+                    text = newPost.text)
             }
         }
+        return false
     }
 
-    /* fun update(post: Post): Boolean{
-         for(post in posts){
-             if(post == postUpdate(post.id)){
-
-             }*/
-}
-}
 
 }
