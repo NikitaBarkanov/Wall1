@@ -3,9 +3,7 @@ fun main(){
     val post1 = Post()
     WallService.addPost(post)
     WallService.addPost(post1)
-    WallService.update(post)
-    println(post)
-    println(post1)
+    println(WallService.update(post1))
 }
 
 data class Text(val str: String = "text")
@@ -43,12 +41,14 @@ object WallService{
     }
 
     fun update(newPost: Post): Boolean{
-        for (post in posts){
+        for ((index, post) in posts.withIndex()){
             if (post.id == newPost.id){
-                post.copy(ownerId = newPost.ownerId + 1,
+                posts[index] = post.copy(
+                    ownerId = newPost.ownerId + 1,
                     fromId = newPost.fromId + 1,
                     createBy = newPost.createBy + 1,
                     text = newPost.text)
+                return true
             }
         }
         return false
