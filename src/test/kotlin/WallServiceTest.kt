@@ -1,31 +1,10 @@
 import org.junit.Assert.*
 import org.junit.Test
 
-@Test
-fun main(){
-    val service = WallService
-    val post1 = Post(
-        id = 1,
-        date = 1,
-        ownerId = 1
-    )
-    val post2 = Post(
-        id = 1,
-        date = 1,
-        ownerId = 1
-    )
-    service.addPost(post1)
-    service.addPost(post2)
-    val result = service.update(post2)
-
-    assertEquals(true, result)
-}
-
-
-class WallServiceTest{
+class WallServiceTest {
 
     @Test
-    fun add(){
+    fun add() {
         val service = WallService
         val post = service.addPost(
             Post(
@@ -34,38 +13,137 @@ class WallServiceTest{
                 date = 33333
             )
         )
-        val result = post.id !=0
+        val result = post.id != 0
         assertEquals(true, result)
     }
 
     @Test
-    fun update(){
+    fun update() {
         val service = WallService
         val post1 = Post(
-            id = 1,
-            date = 1,
-            ownerId = 1
+            id = 0,
+            ownerId = 0,
+            fromId = 0,
+            createBy = 0,
+            date = 0,
+            text = Text(),
+            replyOwnerId = 0,
+            replyPostId = 0,
+            friendsOnly = false,
+            comments = 0,
+            likes = 0,
+            reposts = 0,
+            postType = " ",
+            signerId = 0,
+            canPin = false,
+            canDelete = false,
+            canEdit = false,
+            isPinned = false,
+            markedAsAds = true,
+            isFavourite = false
         )
+        val post2 = Post(
+            id = 0,
+            ownerId = 0,
+            fromId = 0,
+            createBy = 0,
+            date = 0,
+            text = Text(),
+            replyOwnerId = 0,
+            replyPostId = 0,
+            friendsOnly = false,
+            comments = 0,
+            likes = 0,
+            reposts = 0,
+            postType = " ",
+            signerId = 0,
+            canPin = false,
+            canDelete = false,
+            canEdit = false,
+            isPinned = false,
+            markedAsAds = true,
+            isFavourite = false
+        )
+        service.addPost(post1)
+        service.addPost(post2)
+        val result = service.update(post2)
 
-        val result = service.update(post1)
-        assertEquals(false, result)
+        assertEquals(true, result)
     }
 
     @Test
-    fun update1(){
+    fun updateFalse(){
         val service = WallService
         val post1 = Post(
-            id = 1,
-            date = 1,
-            ownerId = 1
+            id = 0,
+            ownerId = 0,
+            fromId = 0,
+            createBy = 0,
+            date = 0,
+            text = Text(),
+            replyOwnerId = 0,
+            replyPostId = 0,
+            friendsOnly = false,
+            comments = 0,
+            likes = 0,
+            reposts = 0,
+            postType = " ",
+            signerId = 0,
+            canPin = false,
+            canDelete = false,
+            canEdit = false,
+            isPinned = false,
+            markedAsAds = true,
+            isFavourite = false
         )
         val post2 = Post(
             id = 1,
-            date = 1,
-            ownerId = 1
+            ownerId = 0,
+            fromId = 0,
+            createBy = 0,
+            date = 0,
+            text = Text(),
+            replyOwnerId = 0,
+            replyPostId = 0,
+            friendsOnly = false,
+            comments = 0,
+            likes = 0,
+            reposts = 0,
+            postType = " ",
+            signerId = 0,
+            canPin = false,
+            canDelete = false,
+            canEdit = false,
+            isPinned = false,
+            markedAsAds = true,
+            isFavourite = false
         )
+        service.addPost(post1)
+        service.addPost(post2)
+        val update = Post(
+            id = 3333,
+            ownerId = 0,
+            fromId = 0,
+            createBy = 0,
+            date = 0,
+            text = Text(),
+            replyOwnerId = 0,
+            replyPostId = 0,
+            friendsOnly = false,
+            comments = 0,
+            likes = 0,
+            reposts = 0,
+            postType = " ",
+            signerId = 0,
+            canPin = false,
+            canDelete = false,
+            canEdit = false,
+            isPinned = false,
+            markedAsAds = true,
+            isFavourite = false
+        )
+        val result = service.update(update)
 
-        val result = (post1.id == post2.id)
-        assertEquals(true, result)
+        assertEquals(false, result)
     }
 }
